@@ -34,11 +34,11 @@ app.get('/', (req, res) => {
 //connect to db
 mongoose.connect(
     //url escondida
-    process.env.DB_CONNECTION, 
-{useNewUrlParser: true},
-() => {
-    console.log("connetct to db!");
-}
+    process.env.DB_CONNECTION,
+    { useNewUrlParser: true },
+    () => {
+        console.log("connetct to db!");
+    }
 );
 
 

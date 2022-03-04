@@ -8,11 +8,11 @@ const Post = require('../models/post_model.js');
 router.get('/', async (req, res) => {
     //res.send('We are on posts');
 
-    try{
+    try {
         const posts = await Post.find(); //retornar tudo
         res.json(posts);
-    }catch(err){
-        res.json({message: err});
+    } catch (err) {
+        res.json({ message: err });
     }
 })
 
@@ -28,11 +28,11 @@ router.get('/get_by_id/:postId', async (req, res) => {
 
 
     //receber dados do objeto específico
-    try{
+    try {
         const post = await Post.findById(req.params.postId);
         res.json(post);
-    }catch(err){
-        res.json({message: err});
+    } catch (err) {
+        res.json({ message: err });
     }
 
 })
@@ -50,13 +50,13 @@ router.post('/', async (req, res) => {
         description: req.body.description
     });
 
-    try{
+    try {
         const savedPost = await post.save();
         res.json(savedPost);
-    }catch(err){
-        res.json({message: err});
+    } catch (err) {
+        res.json({ message: err });
     }
-    
+
 
 });
 
@@ -65,12 +65,12 @@ router.post('/', async (req, res) => {
 
 
 router.delete('/:postId', async (req, res) => {
-    
+
     try {
-        const removedPost = await Post.remove({_id: req.params.postId});
+        const removedPost = await Post.remove({ _id: req.params.postId });
         res.json(removedPost);
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 
 });
@@ -87,7 +87,7 @@ router.patch('/:postId', async (req, res) => {
         );
         res.json(updatedPost);
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 });
 
