@@ -1,12 +1,16 @@
 const mongoose = require('mongoose');
 
 
-const PostSchema = mongoose.Schema({
-    title: {
+const PararaioSchema = mongoose.Schema({
+    azimute: {
         type: String,
         require: true
     },
-    description: {
+    info: {
+        type: Map,
+        require: true
+    },
+    subStation: {
         type: String,
         require: true
     },
@@ -16,13 +20,4 @@ const PostSchema = mongoose.Schema({
     }
 })
 
-
-/*
-mongoose.Schema({
-    username:
-})
-*/
-
-
-
-module.exports = mongoose.model('Posts', PostSchema);
+module.exports = mongoose.model('Pararaio', PararaioSchema);

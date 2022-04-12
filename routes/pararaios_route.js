@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/post_model.js');
+const Pararaio = require('../models/pararaio_model.js');
 
 //////////////////////////////// GET //////////////////////////////////
 
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     //res.send('We are on posts');
 
     try {
-        const posts = await Post.find(); //retornar tudo
+        const posts = await Pararaio.find(); //retornar tudo
         res.json(posts);
     } catch (err) {
         res.json({ message: err });
@@ -24,12 +24,11 @@ router.get('/specific', (req, res) => {
 
 //Specific get post
 router.get('/get_by_id/:postId', async (req, res) => {
-    //console.log(req.params.postId); receber o que foi escrito após o ultimo /
 
 
     //receber dados do objeto específico
     try {
-        const post = await Post.findById(req.params.postId);
+        const post = await Pararaio.findById(req.params.postId);
         res.json(post);
     } catch (err) {
         res.json({ message: err });
@@ -45,10 +44,20 @@ router.get('/get_by_id/:postId', async (req, res) => {
 router.post('/', async (req, res) => {
     //console.log(req.body); saber o que foi postado
 
-    const post = new Post({
-        title: req.body.title,
-        description: req.body.description
+    const post = new Pararaio({
+        azimute: req.body.azimute,
+        info: req.body.info,
+        subStation: req.body.subStation
     });
+
+    //Verificar objeto repetido
+    let pararaioExists = await Pararaio.findOne({info: req.body.info});
+    if(pararaioExists){
+        return res.status(400).json({
+            error: true,
+            message: "Modelo já cadastrado!"
+        })
+    }
 
     try {
         const savedPost = await post.save();
@@ -56,7 +65,6 @@ router.post('/', async (req, res) => {
     } catch (err) {
         res.json({ message: err });
     }
-
 
 });
 
@@ -67,7 +75,7 @@ router.post('/', async (req, res) => {
 router.delete('/:postId', async (req, res) => {
 
     try {
-        const removedPost = await Post.remove({ _id: req.params.postId });
+        const removedPost = await Pararaio.remove({ _id: req.params.postId });
         res.json(removedPost);
     } catch (error) {
         res.json({ message: error });
@@ -81,9 +89,9 @@ router.delete('/:postId', async (req, res) => {
 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Post.updateOne(
+        const updatedPost = await Pararaio.updateOne(
             { _id: req.params.postId },
-            { $set: { title: req.body.title } }
+            { $set: req.body }
         );
         res.json(updatedPost);
     } catch (error) {

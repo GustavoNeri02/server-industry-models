@@ -17,11 +17,10 @@ app.use('/posts', () => {
 })
 */
 
-//import Routes
-const postsRoute = require('../routes/posts_route.js');
+const pararaiosRoute = require('../routes/pararaios_route.js');
 
-app.use('/posts', postsRoute);
-
+//pasta
+app.use('/pararaio', pararaiosRoute);
 
 
 //routes
