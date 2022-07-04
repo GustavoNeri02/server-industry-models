@@ -35,10 +35,11 @@ mongoose.connect(
     //url escondida
     process.env.DB_CONNECTION,
     { useNewUrlParser: true },
-    () => {
-        console.log("connetct to db!");
+    (res) => {
+        //console.log("connect to db!")
+        console.log("*** Message on try connecting\n" + res + "\n***")
     }
-);
+)
 
 
 app.listen(3000, () => console.log("Server running"));

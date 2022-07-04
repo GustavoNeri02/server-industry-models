@@ -16,13 +16,13 @@ router.get('/', async (req, res) => {
     }
 })
 
-
+//Specific get post
 router.get('/specific', (req, res) => {
     res.send('We are on specific');
 })
 
 
-//Specific get post
+//Get by ID
 router.get('/get_by_id/:postId', async (req, res) => {
 
 
