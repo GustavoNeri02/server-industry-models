@@ -17,10 +17,10 @@ app.use('/posts', () => {
 })
 */
 
-const pararaiosRoute = require('../routes/pararaios_route.js');
+const disjuntoresRoute = require('../routes/disjuntores_route.js');
 
 //pasta
-app.use('/pararaio', pararaiosRoute);
+app.use('/disjuntor', disjuntoresRoute);
 
 
 //routes

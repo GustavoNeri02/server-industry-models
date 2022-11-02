@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Pararaio = require('../models/pararaio_model.js');
+const Disjuntor = require('../models/disjuntor_model.js');
 
 //////////////////////////////// GET //////////////////////////////////
 
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     //res.send('We are on posts');
 
     try {
-        const posts = await Pararaio.find(); //retornar tudo
+        const posts = await Disjuntor.find(); //retornar tudo
         res.json(posts);
     } catch (err) {
         res.json({ message: err });
@@ -28,7 +28,7 @@ router.get('/get_by_id/:postId', async (req, res) => {
 
     //receber dados do objeto específico
     try {
-        const post = await Pararaio.findById(req.params.postId);
+        const post = await Disjuntor.findById(req.params.postId);
         res.json(post);
     } catch (err) {
         res.json({ message: err });
@@ -44,15 +44,15 @@ router.get('/get_by_id/:postId', async (req, res) => {
 router.post('/', async (req, res) => {
     //console.log(req.body); saber o que foi postado
 
-    const post = new Pararaio({
+    const post = new Disjuntor({
         azimute: req.body.azimute,
         info: req.body.info,
         subStation: req.body.subStation
     });
 
     //Verificar objeto repetido
-    let pararaioExists = await Pararaio.findOne({info: req.body.info});
-    if(pararaioExists){
+    let disjuntorExists = await Disjuntor.findOne({info: req.body.info});
+    if(disjuntorExists){
         return res.status(400).json({
             error: true,
             message: "Modelo já cadastrado!"
@@ -75,7 +75,7 @@ router.post('/', async (req, res) => {
 router.delete('/:postId', async (req, res) => {
 
     try {
-        const removedPost = await Pararaio.remove({ _id: req.params.postId });
+        const removedPost = await Disjuntor.remove({ _id: req.params.postId });
         res.json(removedPost);
     } catch (error) {
         res.json({ message: error });
@@ -89,7 +89,7 @@ router.delete('/:postId', async (req, res) => {
 
 router.patch('/:postId', async (req, res) => {
     try {
-        const updatedPost = await Pararaio.updateOne(
+        const updatedPost = await Disjuntor.updateOne(
             { _id: req.params.postId },
             { $set: req.body }
         );
